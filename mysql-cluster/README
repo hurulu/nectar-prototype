@@ -1,0 +1,19 @@
+
+
+
+start
+1, start all management nodes
+cd my_cluster;ndb_mgmd -f conf/config.ini --configdir=$HOME/my_cluster/conf/
+2, start all ndbd nodes
+ndbd -c manage_node_ip
+3, start mysql api nodes
+mysqld --defaults-file=$HOME/my_cluster/conf/my.cnf &
+
+stop
+1, stop all mysql api nodes
+mysqladmin -uroot -h localhost -P 5000 shutdown
+2, shutdown ndb_mamage nodes
+ndb_mgm -e shutdown
+
+
+
